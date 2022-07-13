@@ -1,4 +1,4 @@
-from space import Space
+from modules.space import Space
 
 
 class Container:
@@ -29,7 +29,7 @@ class Container:
 		for parcel in self.parcel_inside:
 			volume_inside += parcel.volume
 		
-		return 100 * volume_inside / self.container_volume
+		return volume_inside / self.container_volume
 	
 	def cal_balance_ratio(self):
 		cgx, cgy, cgz, he = 0, 0, 0, 0

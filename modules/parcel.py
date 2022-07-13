@@ -17,6 +17,11 @@ class Parcel:
 		self.state = None
 		
 		self.loading_sequence = None
+		
+	def reset_parcels(self):
+		self.loading_sequence = None
+		self.position = None
+		self.state = None
 	
 	def get_volume(self):
 		return self.width * self.height * self.length
