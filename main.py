@@ -1,4 +1,4 @@
-from mosso.mosso import MultiObjectiveSSO
+from mosso.mosso import MultiObj_MultiPop_SSO
 from modules.inputs import Input as read_data
 from modules.tools import Tools
 from modules.parcel import Parcel
@@ -56,11 +56,11 @@ if __name__ == '__main__':
     data = get_list_parcels(file_num, problem_num, sort_by_base=True)
     container = Container(width=233, length=587, height=220, max_weight=35000)
     
-    model = MultiObjectiveSSO(container, data, num_pops=5, num_gens=50, num_individuals=10)
+    model = MultiObj_MultiPop_SSO(container, data, num_pops=5, num_gens=50, num_individuals=10)
     optimal_solution = model.find_optimal_solution()
     
     # visualize optimal solution
-    sol_info = {'container_dimension': [241, 1353, 269]}
+    sol_info = {'container_dimension': [241, 587, 269]}
     # sol_info = {
     #     'container_dimension': [241, 1353, 269],
     #     'space_utilization': optimal_solution.space_utilization,
