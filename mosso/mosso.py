@@ -20,6 +20,8 @@ class MultiObjectiveSSO:
         for run in range(self.num_generations):
             pass
 
+        return self.container
+
     def create_population(self, num_pops, num_individuals, container, parcels):
         self.population = [Population(num_individuals, container, parcels) for _ in range(num_pops)]
         

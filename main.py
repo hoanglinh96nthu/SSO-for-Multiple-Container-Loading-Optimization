@@ -38,7 +38,8 @@ def get_list_parcels(file_index=1, problem=1, sort_by_base=True):
         return sorted(parcel_lists, key=lambda x: x.loading_sequence)
 
 def visualize_loading_solution(solution, info):
-    container_width, container_length, container_height = sol_info['container_dimension'][:]
+    container_width, container_length, container_height = \
+        info['container_dimension'][:]
     tools = Tools(container_width, container_length, container_height)
 
     position, pos_space = [], []
@@ -47,7 +48,7 @@ def visualize_loading_solution(solution, info):
         position.append(tuple(parcel.position))
         size.append(tuple([parcel.width, parcel.length, parcel.height]))
 
-    tools.plot_container(position, size, num_box=len(optimal_solution))
+    tools.plot_container(position, size, num_box=len(solution))
 
 
 if __name__ == '__main__':
@@ -59,10 +60,11 @@ if __name__ == '__main__':
     optimal_solution = model.find_optimal_solution()
     
     # visualize optimal solution
+    sol_info = {'container_dimension': [241, 1353, 269]}
     # sol_info = {
     #     'container_dimension': [241, 1353, 269],
     #     'space_utilization': optimal_solution.space_utilization,
     #     'balance_ratio': optimal_solution.balance_ratio,
     #     'loaded_ratio': [optimal_solution.loaded_parcels, optimal_solution.total_parcels]
     # }
-    # visualize_loading_solution(solution=optimal_solution, info=sol_info)
+    visualize_loading_solution(optimal_solution.parcel_inside, info=sol_info)

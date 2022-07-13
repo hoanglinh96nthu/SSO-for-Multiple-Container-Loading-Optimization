@@ -5,8 +5,7 @@ class Input:
 	def __init__(self, file_number, problem_number):
 		"""Pre-processing and convert .txt data to proper input. """
 		# open file and get data from txt file
-		iFile = open(r"C:\Users\LINHHOANG.TRUONG\Desktop\Linh\My "
-		             r"works\multi-objective_optimization\SSO-for-Multiple-Container-Loading-Optimization\dataset/wtpack" + str(file_number) + ".txt", 'r')
+		iFile = open("dataset/wtpack" + str(file_number) + ".txt", 'r')
 		lines = iFile.readlines()  # read each line in txt file
 		
 		self.ntype = int(lines[1].split()[0])

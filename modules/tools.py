@@ -14,33 +14,33 @@ class Tools:
 		self.LENGTH = con_length
 		self.WIDTH = con_width
 		self.HEIGHT = con_height
-	
-	def plot_container(self, position, size, num_box, title):
+
+	def plot_container(self, position, size, num_box, title='Title'):
 		"""Plot box loaded in container as optimized sequences.
 
 		- position: positions = [(0,0,0)], gốc tọa độ của box
 		- sizes = [(4,5,3)] size của
 		- num_box: to generate different color for each box
 		"""
-		
+
 		number_of_colors = num_box
 		colors = ["#" + ''.join([rand.choice('0123456789ABCDEF') for j in range(6)]) \
-		          for i in range(number_of_colors)]
-		
+				  for i in range(number_of_colors)]
+
 		fig = plt.figure()
 		ax = fig.add_subplot(projection='3d')
 		ax.set_box_aspect((self.LENGTH, self.WIDTH, self.HEIGHT))
-		
+
 		pc = self.plotCube(position, size, colors=colors, edgecolor="k")
 		ax.add_collection3d(pc)
-		
+
 		ax.set_xlim([0, self.LENGTH])
 		ax.set_ylim([0, self.WIDTH])
 		ax.set_zlim([0, self.HEIGHT])
 		ax.set_title(title)
-		
+
 		plt.show()
-	
+
 	def cuboid_data(self, o, size=(1, 1, 1)):
 		X = [[[0, 1, 0], [0, 0, 0], [1, 0, 0], [1, 1, 0]],
 		     [[0, 0, 0], [0, 0, 1], [1, 0, 1], [1, 0, 0]],
@@ -52,23 +52,23 @@ class Tools:
 		for i in range(3):
 			X[:, :, i] *= size[i]
 		X += np.array(o)
-		
+
 		return X
-	
+
 	def plotCube(self, positions, sizes=None, colors=None, **kwargs):
 		if not isinstance(colors, (list, np.ndarray)):
 			colors = ["C0"] * len(positions)
 		if not isinstance(sizes, (list, np.ndarray)):
 			sizes = [(1, 1, 1)] * len(positions)
-		
+
 		g = []
 		for p, s, c in zip(positions, sizes, colors):
 			g.append(self.cuboid_data(o=p, size=s))
-		
+
 		return Poly3DCollection(np.concatenate(g), edgecolors='k',
 		                        facecolors=np.repeat(colors, 6),
 		                        linewidths=1, alpha=0.8, **kwargs)
-	
+
 	def plot_graph(self, y_line, lable):
 		"""
 		Plot graph.
