@@ -4,6 +4,7 @@ class Population:
 	def __init__(self, num_inds, container, parcels):
 		self.population = [Individual(container, parcels) for _ in range(num_inds)]
 		self.pareto_frontier = self.find_pareto_frontier()
+		
 		self.pop_gBest_value = None
 		self.pop_gBest_chromosome = None
 		self.calculate_crowding_distance()
@@ -24,13 +25,13 @@ class Population:
 				front.sort(key=lambda x: x.fitness_value[m])
 				front[0].crowding_distance = 10 ** 9
 				front[solutions_num - 1].crowding_distance = 10 ** 9
-				m_values = [individual.objectives[m] for individual in front]
+				m_values = [individual.fitness_value[m] for individual in front]
 				scale = max(m_values) - min(m_values)
 				if scale == 0: scale = 1
 				
 				for i in range(1, solutions_num - 1):
 					front[i].crowding_distance += \
-						(front[i + 1].objectives[m] - front[i - 1].objectives[m]) / scale
+						(front[i + 1].fitness_value[m] - front[i - 1].fitness_value[m]) / scale
 
 	def find_pareto_frontier(self):
 		"""Return dominated particles"""

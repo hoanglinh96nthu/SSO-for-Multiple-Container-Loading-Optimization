@@ -27,9 +27,10 @@ def check_exceed_weight(container, parcel):
 def build_solution(container, list_parcels):
 	# initial container space
 	container.create_container()
+	sorted_parcels = sorted(list_parcels, key=lambda x:x.loading_sequence)
 	
 	# looping for space in container to load parcels
-	for idx, parcel in enumerate(list_parcels):
+	for idx, parcel in enumerate(sorted_parcels):
 		can_load = False
 		for space in container.container_space:
 			

@@ -104,7 +104,7 @@ class Container:
 			sorted(self.container_space,
 			       key=lambda x: (x.start_location[1], x.start_location[0], x.start_location[2]))
 		
-		self.merge_space()
+		# self.merge_space()
 	
 	def merge_space(self):
 		can_merge = True
