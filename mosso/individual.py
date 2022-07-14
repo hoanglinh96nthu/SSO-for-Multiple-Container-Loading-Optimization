@@ -74,7 +74,7 @@ class Individual:
 
 		self.domination_count = 0
 		self.dominated_solutions = None
-
+		self.crowding_distance = None
 
 	def dominates(self, other_individual):
 		and_condition = True
