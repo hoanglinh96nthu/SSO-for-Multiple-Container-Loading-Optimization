@@ -1,16 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mosso.mosso import MultiObj_MultiPop_SSO
-from modules.inputs import Input as read_data
-from modules.tools import Tools
-from modules.parcel import Parcel
 from modules.container import Container
-import random
+from modules.inputs import Input as read_data
+from modules.parcel import Parcel
+from modules.tools import Tools
+from mosso.mosso import MultiObj_MultiPop_SSO
 
 
-def get_list_parcels(file_index=1, problem=1, sort_by_base=True):
-    input_data = read_data(file_number=file_index, problem_number=problem)  # use raw data file as input
+def get_list_parcels(file_index=1, problem=1):
+    input_data = read_data(file_number=file_index, problem_number=problem)
+    # use raw data file as input
     
     # load parcel information from data
     parcel_lists = []
@@ -50,7 +50,7 @@ def visualize_loading_solution(solution, info):
 
 if __name__ == '__main__':
     file_num, problem_num = 1, 1
-    data = get_list_parcels(file_num, problem_num, sort_by_base=True)
+    data = get_list_parcels(file_num, problem_num)
     container = Container(width=233, length=587, height=220, max_weight=35000)
     
     model = MultiObj_MultiPop_SSO(container, data, num_pops=1, num_gens=50, num_individuals=100)
@@ -62,7 +62,7 @@ if __name__ == '__main__':
         frontier.append(ind.fitness_value + [ind.rank])
         
     frontier = np.array(frontier)
-    plt.scatter(x=frontier[:, 0], y=frontier[: 1], c=frontier[:2])
+    plt.scatter(x=frontier[:, 0], y=frontier[:, 1], c=frontier[:, 2])
     plt.show()
     
     # visualize optimal solution
